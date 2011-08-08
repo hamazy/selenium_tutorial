@@ -1,0 +1,268 @@
+Selenium チュートリアル
+=======================
+:lang: ja
+
+Selenium IDE
+------------
+
+Selenium IDE のインストール
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Selenium IDE は Firefox のアドオンですので、Firefox がインストールされていることが前提となります。
+Firefox が未インストールの場合は、 http://mozilla.jp/firefox/[Mozilla のWebサイト] からダウンロードしてインストールします。
+
+Firefox を起動し、 http://seleniumhq.org/download/ から Selenium IDE の最新バージョン
+footnote:[執筆時点での Selenium IDE の最新バージョンは 1.1.0 です。] へのリンクをクリックします。
+
+image:images/selenium_ide_download.png["Selenium のダウンロードページ",height=420]
+
+アドオンのインストールを許可するかどうか尋ねられますが、Allow をクリックして許可します。
+
+image:images/firefox_allow_install.png[""]
+
+ダウンロードが完了後、 Install Now をクリックします。
+
+image:images/firefox_install_addons.png[""]
+
+Firefox 再起動をすると、アドオンが有効になります。
+
+image:images/firefox_restart_needed.png[]
+
+ブラウザーの操作を記録する
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+`Tools` - `Selenium IDE` メニューを選択して、Selenium IDE のウィンドウを開きます。
+
+image:images/selenium_ide_window.png["",heihgt=420]
+
+Selenium IDE が記録モード image:images/selenium_ide_recording.png[] になっていることを確認し、
+Firefox で以下の操作をします。
+
+. アドレスバーに http://www.google.co.jp を入力し、ページへアクセスする。
+. 入力フィールドに 「株式会社エス・スリー・フォー」を入力し、Enter キーを押下する。
+. 検索結果から「株式会社エス・スリー・フォー」のリンクをクリックする。
+
+image:images/firefox_google_top.png["",height=360]
+
+image:images/firefox_google_searching.png["",height=360]
+
+上記の操作が、Selenium IDE ウィンドウに記録されていることを確認します。
+
+image:images/selenium_ide_recorded.png["",height=420]
+
+記録ボタン image:images/selenium_ide_recording.png[] をクリックして、記録モードをオフにします。
+
+テストケースを保存する
+~~~~~~~~~~~~~~~~~~~~~~
+
+記録した操作は、テストケースとしてファイルに保存することができます。
+
+`File` - `Save Test Case` メニューを選択して、 SearchOnGoogelTestCase.html として保存します。
+footnote:[Selenium IDE のテストケースは、特殊な形式に従った HTML文書としてファイルに保存されます。]
+
+image:images/selenium_ide_save_testcase.png[""]
+
+テストケースを実行する
+~~~~~~~~~~~~~~~~~~~~~~
+
+保存したテストケースを様々な方法で実行してみます。
+
+任意のコマンドを実行する
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Selenium IDE ウィンドウの Table タブには、テストケースとして記録した操作が表形式で表示されています。
+これらの操作は、任意のものを選択して、個別に実行することができます。
+footnote:[ただし、それぞれの操作はブラウザーの表示内容に依存する場合がほとんどですので、順番に実行しなければ上手く実行できないかもしれません。]
+
+表の中から1番上の行の `open /` を選択し、その状態で `Actions` - `Execute this command` メニューを選択します。footnote:[右クリックメニューで選択したり、行の上でのダブルクリックや、xキーを押下するというショートカットも用意されています。]
+
+同様に、表中の行を順番に選択し、実行していきます。
+
+テストケースごとに実行する
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Actions - Play current test case メニューを選択して、テストケースを実行します。
+
+テストケースの内容に従って、ブラウザーが動作するのを確認します。
+
+[NOTE]
+=====================================================================
+上で記録したテストケースを実行すると、最後の `clickAndWait css=em` のところでテストが失敗します。
+<<sele-ide-edit-testcase>> で、この点を修正します。
+=====================================================================
+
+ステップ実行する
+^^^^^^^^^^^^^^^^
+
+あるコマンドにブレイクポイントを設定しておき、テストケースの実行をそのコマンドで中断してから、ステップ実行することもできます。
+
+`type id=lst-ib 株式会社エス・スリー・フォー` の行を選択した状態で、 Actions - Toggle Breakpoint を選択します。
+
+下図のように、ブレイクポイントがセットされます。
+
+image:images/selenium_ide_break_point.png[""]
+
+ブレイクポイントのアイコンがついた状態で、Actions - Play current test case メニューを選択し、テストケースを実行します。
+
+下図のように、ブレークポイントで実行が中断します。
+
+image:images/selenium_ide_paused.png[""]
+
+ブレイクポイントで実行が中断したことを確認し、ステップ実行ボタン image:images/selenium_ide_step.png[""] をクリックして、残りのコマンドを順に実行していきます。
+
+[[sele-ide-edit-testcase]]
+テストケースを編集する
+~~~~~~~~~~~~~~~~~~~~~~
+
+コマンドを追加する
+^^^^^^^^^^^^^^^^^^
+
+`clickAndWait css=em` の行を選択し、その状態で Edit - Insert New Command メニューを選択します。
+
+新しいコマンドに、下表のように値を入力します。
+
+|=============================
+|Command|waitForElementPresent
+|Target |css=em
+|Value  |
+|=============================
+
+コマンドを編集する
+^^^^^^^^^^^^^^^^^^
+
+TODO
+
+[[export_test_code]]
+テストケースからテストコードを出力する
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+File - Export Test Case As... - JUnit4 (WebDriver) メニューを選択し、 `SerachOnGoogleTestCase.java` として保存します。
+
+Selenium 2.0 (WebDriver)
+------------------------
+
+ここでは、http://maven.apache.org/[Apache Maven] と http://www.eclipse.org/[Eclipse] を用いて、Selenium 2.0 のテストを作成します。Maven と Eclipse は既にインストールされているものとします。
+
+プロジェクトの作成
+~~~~~~~~~~~~~~~~~~
+
+ターミナルから下記を実行します。
+
+.......................
+$ mvn archetype:generate \
+> -DarchetypeArtifactId=maven-archetype-quickstart \
+> -DarchetypeGroupId=org.apache.maven.archetypes \
+> -DgroupId=jp.co.s34.selenium \
+> -DartifactId=webdriver-tut -DinteractiveMode
+.......................
+
+実行したディレクトリーに `webdriver-tut` というディレクトリーが生成されます。
+
+`webdriver-tut/pom.xml` を任意のエディタで以下のように編集します。
+
+--------------------
+<project
+...
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.8.2</version>                   <1>
+      <scope>test</scope>
+    </dependency>
+    <dependency>                                 <2>
+      <groupId>org.seleniumhq.selenium</groupId> <2>
+      <artifactId>selenium-java</artifactId>     <2>
+      <version>2.1.0</version>                   <2>
+      <scope>test</scope>                        <2>
+    </dependency>                                <2>
+  </dependencies>
+</project>
+--------------------
+
+<1> JUnit のバージョン番号を 4.8.2 に変更します。
+<2> Selenium への依存性について定義する `<dependency>` を追加します。
+
+下記のように、`webdriver-tut` ディレクトリーに移動して、`mvn install` を実行します。
+
+--------------------
+$ cd webdriver-tut
+$ mvn install
+--------------------
+
+これで、必要な JARファイルが、実行したマシン上にある Maven のローカルリポジトリにインストールされました。
+
+Eclipse のワークスペースから Maven ローカルリポジトリを参照できるようにするため、下記のように実行します。下記は、Eclipse のワークスペースが `$HOME/Documents/selenium-tutorial` にある場合の例です。実際の環境に合わせて実行して下さい。
+
+--------------------
+$ mvn eclipse:add-maven-repo -Declipse.workspace=$HOME/Documents/selenium-tutorial
+--------------------
+
+[NOTE]
+====================
+`mvn eclipse:add-maven-repo` は、ワークスペースに対して1回実行すれば十分です。プロジェクトを作成するたびに実行する必要はありません。
+====================
+
+以下を実行し、Eclipse プロジェクトに必要なファイル (`.classpath`, `.project`) を生成します。
+
+--------------------
+$ mvn eclipse:eclipse
+--------------------
+
+上のコマンドを実行すると、`webdriver-tut` ディレクトリー配下に `.classpath`, `.project` が出来ていることを確認して下さい。
+
+Eclipseを起動し、ワークスペースを開きます。さらに、ワークベンチを開きます。
+
+image:images/eclipse_workbench_initial.png["",height=420]
+
+Eclipse のメニューから、`File` - `Import` メニューで、`Existing Projects into Workspace` を選択し `Next` をクリックします。
+
+image:images/eclipse_import_select.png["",height=420]
+
+mvn コマンドで出来たディレクトリーを指定し、`Finish` をクリックします。
+
+image:images/eclipse_import_project.png["",height=420]
+
+`Package Explorer` に `webdriver-tut` プロジェクトが出来ていることを確認して下さい。
+
+image:images/eclipse_project_imported.png["",height=420]
+
+テストコードの作成
+~~~~~~~~~~~~~~~~~~
+
+<<export_test_code>> でエクスポートしたテストコードをインポートし、それに編集を加えてテストコードを作成します。
+
+まず、<<export_test_code>> でエクスポートした `SerachOnGoogleTestCase.java` を、`Pacage Explorer` の `webdriver-tut` - `src/test/java` - `jp.co.s34.selenium` 上にドラッグ&amp;ドロップして下さい。
+
+image:images/eclipse_selenium_package.png["",height=420]
+
+以下のダイアログが表示され、ファイルをコピーするかリンクを作るか尋ねられますが、デフォルトの `Copy files`のまま `OK` をクリックします。
+
+image:images/eclipse_file_operation.png[""]
+
+インポートした `SearchOnGoogleTestCase.java` は、そのままではコンパイルが通らないため、エラーが表示されています。
+
+image:images/eclipse_testcase_opened.png["",height=420]
+
+コンパイルエラーが発生しているのは、パッケージ名を定義している以下の箇所です。
+
+------------------------------
+package com.example.tests;
+------------------------------
+
+`SearchOnGoogleTestCase.java` をダブルクリックしてエディターで表示し、クイックフィックスアイコン image:images/eclipse_quick_fix.png[""] をクリックし、`Move 'SerachOnGoogleTestCase.java' to package 'com.example.tests'`を選択します。
+
+Selenium 1.0 (Selenium)
+-----------------------
+
+TODO
+
+Selenium Grid
+-------------
+
+TODO
+
+
+
+mvn -q archetype:generate -Darchetype=maven-archetype-quickstart -DarchetypeGroupId=org.apache.maven.archetypes -DgroupId=jp.co.s34.selenium -DartifactId=webdriver-tut                      
+                                     -DarchetypeGroupId=org.apache.maven.archetypes -DgroupId=jp.co.s34.selenium -DartifactId=webdriver-tut                                                                                   
