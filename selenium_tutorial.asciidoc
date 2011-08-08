@@ -1,5 +1,9 @@
 Selenium チュートリアル
 =======================
+:doctype: article
+:toc:
+:icons:
+:encoding: UTF-8
 :lang: ja
 
 Selenium IDE
@@ -74,14 +78,15 @@ Selenium IDE ウィンドウの Table タブには、テストケースとして
 これらの操作は、任意のものを選択して、個別に実行することができます。
 footnote:[ただし、それぞれの操作はブラウザーの表示内容に依存する場合がほとんどですので、順番に実行しなければ上手く実行できないかもしれません。]
 
-表の中から1番上の行の `open /` を選択し、その状態で `Actions` - `Execute this command` メニューを選択します。footnote:[右クリックメニューで選択したり、行の上でのダブルクリックや、xキーを押下するというショートカットも用意されています。]
+表の中から1番上の行の `open /` を選択し、その状態で `Actions` - `Execute this command` メニューを選択します。
+footnote:[右クリックメニューで選択したり、行の上でのダブルクリックや、xキーを押下するというショートカットも用意されています。]
 
 同様に、表中の行を順番に選択し、実行していきます。
 
 テストケースごとに実行する
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Actions - Play current test case メニューを選択して、テストケースを実行します。
+`Actions` - `Play current test case` メニューを選択して、テストケースを実行します。
 
 テストケースの内容に従って、ブラウザーが動作するのを確認します。
 
@@ -96,19 +101,20 @@ Actions - Play current test case メニューを選択して、テストケー�
 
 あるコマンドにブレイクポイントを設定しておき、テストケースの実行をそのコマンドで中断してから、ステップ実行することもできます。
 
-`type id=lst-ib 株式会社エス・スリー・フォー` の行を選択した状態で、 Actions - Toggle Breakpoint を選択します。
+`type id=lst-ib 株式会社エス・スリー・フォー` の行を選択した状態で、 `Actions` - `Toggle Breakpoint` メニューを選択します。
 
 下図のように、ブレイクポイントがセットされます。
 
 image:images/selenium_ide_break_point.png[""]
 
-ブレイクポイントのアイコンがついた状態で、Actions - Play current test case メニューを選択し、テストケースを実行します。
+ブレイクポイントのアイコンがついた状態で、`Actions` - `Play current test case` メニューを選択し、テストケースを実行します。
 
 下図のように、ブレークポイントで実行が中断します。
 
 image:images/selenium_ide_paused.png[""]
 
-ブレイクポイントで実行が中断したことを確認し、ステップ実行ボタン image:images/selenium_ide_step.png[""] をクリックして、残りのコマンドを順に実行していきます。
+ブレイクポイントで実行が中断したことを確認し、ステップ実行ボタン
+image:images/selenium_ide_step.png[""] をクリックして、残りのコマンドを順に実行していきます。
 
 [[sele-ide-edit-testcase]]
 テストケースを編集する
@@ -117,7 +123,7 @@ image:images/selenium_ide_paused.png[""]
 コマンドを追加する
 ^^^^^^^^^^^^^^^^^^
 
-`clickAndWait css=em` の行を選択し、その状態で Edit - Insert New Command メニューを選択します。
+`clickAndWait css=em` の行を選択し、その状態で `Edit` - `Insert New Command` メニューを選択します。
 
 新しいコマンドに、下表のように値を入力します。
 
@@ -136,12 +142,13 @@ TODO
 テストケースからテストコードを出力する
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-File - Export Test Case As... - JUnit4 (WebDriver) メニューを選択し、 `SerachOnGoogleTestCase.java` として保存します。
+`File` - `Export Test Case As...` - `JUnit4 (WebDriver)` メニューを選択し、 `SerachOnGoogleTestCase.java` として保存します。
 
 Selenium 2.0 (WebDriver)
 ------------------------
 
-ここでは、http://maven.apache.org/[Apache Maven] と http://www.eclipse.org/[Eclipse] を用いて、Selenium 2.0 のテストを作成します。Maven と Eclipse は既にインストールされているものとします。
+ここでは、http://maven.apache.org/[Apache Maven] と http://www.eclipse.org/[Eclipse] を用いて、
+Selenium 2.0 のテストを作成します。Maven と Eclipse は既にインストールされているものとします。
 
 プロジェクトの作成
 ~~~~~~~~~~~~~~~~~~
@@ -192,7 +199,8 @@ $ mvn install
 
 これで、必要な JARファイルが、実行したマシン上にある Maven のローカルリポジトリにインストールされました。
 
-Eclipse のワークスペースから Maven ローカルリポジトリを参照できるようにするため、下記のように実行します。下記は、Eclipse のワークスペースが `$HOME/Documents/selenium-tutorial` にある場合の例です。実際の環境に合わせて実行して下さい。
+Eclipse のワークスペースから Maven ローカルリポジトリを参照できるようにするため、下記のように実行します。
+下記は、Eclipse のワークスペースが `$HOME/Documents/selenium-tutorial` にある場合の例です。実際の環境に合わせて実行して下さい。
 
 --------------------
 $ mvn eclipse:add-maven-repo -Declipse.workspace=$HOME/Documents/selenium-tutorial
@@ -232,7 +240,8 @@ image:images/eclipse_project_imported.png["",height=420]
 
 <<export_test_code>> でエクスポートしたテストコードをインポートし、それに編集を加えてテストコードを作成します。
 
-まず、<<export_test_code>> でエクスポートした `SerachOnGoogleTestCase.java` を、`Pacage Explorer` の `webdriver-tut` - `src/test/java` - `jp.co.s34.selenium` 上にドラッグ&amp;ドロップして下さい。
+まず、<<export_test_code>> でエクスポートした `SerachOnGoogleTestCase.java` を、
+`Pacage Explorer` の `webdriver-tut` - `src/test/java` - `jp.co.s34.selenium` 上にドラッグ&amp;ドロップして下さい。
 
 image:images/eclipse_selenium_package.png["",height=420]
 
@@ -240,9 +249,20 @@ image:images/eclipse_selenium_package.png["",height=420]
 
 image:images/eclipse_file_operation.png[""]
 
-インポートした `SearchOnGoogleTestCase.java` は、そのままではコンパイルが通らないため、エラーが表示されています。
+`SearchOnGoogleTestCase.java` をダブルクリックして、エディターで開きます。
 
 image:images/eclipse_testcase_opened.png["",height=420]
+
+インポートした `SearchOnGoogleTestCase.java` は、そのままではコンパイルが通らないなど、修正すべき点がいくつかあります。
+
+* パッケージ名が正しくない
+* `String` 型変数 `baseUrl` の値が空になっている
+* アクセスする Webページの URI が正しくない
+
+以降、これらを修正します。
+
+パッケージ名の修正
+^^^^^^^^^^^^^^^^^^
 
 コンパイルエラーが発生しているのは、パッケージ名を定義している以下の箇所です。
 
@@ -250,7 +270,138 @@ image:images/eclipse_testcase_opened.png["",height=420]
 package com.example.tests;
 ------------------------------
 
-`SearchOnGoogleTestCase.java` をダブルクリックしてエディターで表示し、クイックフィックスアイコン image:images/eclipse_quick_fix.png[""] をクリックし、`Move 'SerachOnGoogleTestCase.java' to package 'com.example.tests'`を選択します。
+クイックフィックスアイコン
+image:images/eclipse_quick_fix.png[""] をクリックし、
+`Change package declaration to jp.co.s34.selenium` を選択します。
+
+`baseUrl` の修正
+^^^^^^^^^^^^^^^^
+
+[source,java]
+.修正前
+--------------------
+...
+public class SerachOnGoogleTestCase {
+	private WebDriver driver;
+	private String baseUrl="";                        /* <1> */
+...
+--------------------
+
+<1> baseUrl が空文字で初期化されています。
+
+[source,java]
+.修正後
+--------------------
+...
+public class SerachOnGoogleTestCase {
+	private WebDriver driver;
+	private String baseUrl="http://www.google.co.jp"; /* <1> */
+...
+--------------------
+
+<1> baseUrl を `http://www.google.co.jp` で初期化します。
+
+アクセス先の URI の修正
+^^^^^^^^^^^^^^^^^^^^^^^
+
+[source,java]
+.修正前
+--------------------
+...
+	@Test
+	public void testSerachOnGoogleTestCase() throws Exception {
+		driver.get("/");              /* <1> */
+...
+--------------------
+
+<1> アクセス先 URI の値が不正です。
+
+[source,java]
+.修正後
+--------------------
+...
+	@Test
+	public void testSerachOnGoogleTestCase() throws Exception {
+		driver.get(baseUrl + "/");    /* <1> */
+...
+--------------------
+
+<1> `baseUrl` と連結して、アクセス先 URI を正しい値にします。
+
+以上を修正すると、`SearchOnGoogleTestCase.java` は下のようになります。
+
+[source,java]
+.`SearchOnGoogleTestCase.java`
+--------------------
+package jp.co.s34.selenium;
+
+import java.util.regex.Pattern;
+import java.util.concurrent.TimeUnit;
+import org.junit.*;
+import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
+import org.openqa.selenium.*;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public class SerachOnGoogleTestCase {
+	private WebDriver driver;
+	private String baseUrl="http://www.google.co.jp";
+	private StringBuffer verificationErrors = new StringBuffer();
+	@Before
+	public void setUp() throws Exception {
+		driver = new FirefoxDriver();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	}
+
+	@Test
+	public void testSerachOnGoogleTestCase() throws Exception {
+		driver.get(baseUrl + "/");
+		driver.findElement(By.id("lst-ib")).clear();
+		driver.findElement(By.id("lst-ib")).sendKeys("株式会社エス・スリー・フォー");
+		for (int second = 0;; second++) {
+			if (second >= 60) fail("timeout");
+			try { if (isElementPresent(By.cssSelector("em"))) break; } catch (Exception e) {}
+			Thread.sleep(1000);
+		}
+
+		driver.findElement(By.cssSelector("em")).click();
+	}
+
+	@After
+	public void tearDown() throws Exception {
+		driver.quit();
+		String verificationErrorString = verificationErrors.toString();
+		if (!"".equals(verificationErrorString)) {
+			fail(verificationErrorString);
+		}
+	}
+
+	private boolean isElementPresent(By by) {
+		try {
+			driver.findElement(by);
+			return true;
+		} catch (NoSuchElementException e) {
+			return false;
+		}
+	}
+}
+--------------------
+
+`File` - `Save` メニューを選択して、`SearchOnGoogleTestCase.java` の変更を保存します。
+
+テストコードの実行
+~~~~~~~~~~~~~~~~~~
+
+`Package Explorer` の `webdriver-tut` - `src/test/java` -
+`jp.co.s34.selenium` - `SearchOnGoogleTestCase.java` 上で右クリックし、
+`Run As...` - `JUnit Test` メニューを選択します。
+
+Firefox が起動し、テストが自動的に実行されることを確認します。
+
+また、Eclipse では JUnitビューが開かれ、以下のようにテスト結果が表示されます。
+
+image:images/eclipse_junit_view.png["",height=420]
 
 Selenium 1.0 (Selenium)
 -----------------------
@@ -262,7 +413,4 @@ Selenium Grid
 
 TODO
 
-
-
-mvn -q archetype:generate -Darchetype=maven-archetype-quickstart -DarchetypeGroupId=org.apache.maven.archetypes -DgroupId=jp.co.s34.selenium -DartifactId=webdriver-tut                      
-                                     -DarchetypeGroupId=org.apache.maven.archetypes -DgroupId=jp.co.s34.selenium -DartifactId=webdriver-tut                                                                                   
+// include::footer.txt[]
