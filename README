@@ -1,1 +1,9 @@
 A tutorial document for Selenium.
+
+To generate an XHTML document, run 
+
+ $ a2x -f xhtml --icons --icons-dir=/usr/local/etc/asciidoc/images/icons selenium_tutorial.asciidoc
+
+or,
+
+ $ asciidoc -a iconsdir=/usr/local/etc/asciidoc/images/icons selenium_tutorial.asciidoc

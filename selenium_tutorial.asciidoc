@@ -6,13 +6,19 @@ Selenium チュートリアル
 :encoding: UTF-8
 :lang: ja
 
+このチュートリアルは、 http://www.seleniumhq.org/[Selenium]
+の最も基本的な機能を、素早く一通り試してみることを目的としています。
+
+Mac OS で操作した結果を元に記述していますが、Linux や Windows
+でも同様に操作することができます。
+
 Selenium IDE
 ------------
 
 Selenium IDE のインストール
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Selenium IDE は Firefox のアドオンですので、Firefox がインストールされていることが前提となります。
+Selenium IDE は Firefox のアドオンとして提供されているため、Firefox がインストールされていることが前提となります。
 Firefox が未インストールの場合は、 http://mozilla.jp/firefox/[Mozilla のWebサイト] からダウンロードしてインストールします。
 
 Firefox を起動し、 http://seleniumhq.org/download/ から Selenium IDE の最新バージョン
@@ -20,11 +26,11 @@ footnote:[執筆時点での Selenium IDE の最新バージョンは 1.1.0 で�
 
 image:images/selenium_ide_download.png["Selenium のダウンロードページ",height=420]
 
-アドオンのインストールを許可するかどうか尋ねられますが、Allow をクリックして許可します。
+アドオンのインストールを許可するかどうか尋ねられます。Allow をクリックして許可します。
 
 image:images/firefox_allow_install.png[""]
 
-ダウンロードが完了後、 Install Now をクリックします。
+ダウンロード完了後、 Install Now をクリックします。
 
 image:images/firefox_install_addons.png[""]
 
@@ -76,7 +82,8 @@ image:images/selenium_ide_save_testcase.png[""]
 
 Selenium IDE ウィンドウの Table タブには、テストケースとして記録した操作が表形式で表示されています。
 これらの操作は、任意のものを選択して、個別に実行することができます。
-footnote:[ただし、それぞれの操作はブラウザーの表示内容に依存する場合がほとんどですので、順番に実行しなければ上手く実行できないかもしれません。]
+footnote:[ただし、それぞれの操作はブラウザーの表示内容に依存するものが多くあります。
+そのため、順番に実行しなければ上手く実行できないことがあります。]
 
 表の中から1番上の行の `open /` を選択し、その状態で `Actions` &raquo; `Execute this command` メニューを選択します。
 footnote:[右クリックメニューで選択したり、行の上でのダブルクリックや、xキーを押下するというショートカットも用意されています。]
@@ -144,9 +151,12 @@ TODO
 テストケースからテストコードを出力する
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-`File` &raquo; `Export Test Case As...` &raquo; `JUnit4 (WebDriver)` メニューを選択し、 `SearchOnGoogleWDTestCase.java` として保存します。
+`File` &raquo; `Export Test Case As...` &raquo; `JUnit4 (WebDriver)`
+メニューを選択し、 `SearchOnGoogleWDTestCase.java` として保存します。
 
-同様に、`File` &raquo; `Export Test Case As...` &raquo; `JUnit4 (Remote Control)` メニューを選択し、 `SearchOnGoogleRCTestCase.java` として保存します。
+同様に、`File` &raquo; `Export Test Case As...` &raquo;
+`JUnit4 (Remote Control)` メニューを選択し、
+`SearchOnGoogleRCTestCase.java` として保存します。
 
 Selenium 2.0 (WebDriver)
 ------------------------
@@ -170,7 +180,7 @@ $ mvn archetype:generate \
 
 実行したディレクトリーに `webdriver-tut` というディレクトリーが生成されます。
 
-`webdriver-tut/pom.xml` を任意のエディタで以下のように編集します。
+`webdriver-tut/pom.xml` を任意のエディターで以下のように編集します。
 
 [[webdriver-pom-xml-modification]]
 .webdriver-tut/pom.xml の修正内容
@@ -243,13 +253,15 @@ image:images/eclipse_import_project.png["",height=420]
 
 image:images/eclipse_project_imported.png["",height=420]
 
+[[webdriver-create-test]]
 テストコードの作成
 ~~~~~~~~~~~~~~~~~~
 
 <<export_test_code>> でエクスポートしたテストコードをインポートし、それに編集を加えてテストコードを作成します。
 
 まず、<<export_test_code>> でエクスポートした `SearchOnGoogleWDTestCase.java` を、
-`Pacage Explorer` の `webdriver-tut` &raquo; `src/test/java` &raquo; `jp.co.s34.selenium` 上にドラッグ&amp;ドロップします。
+`Pacage Explorer` の `webdriver-tut` &raquo; `src/test/java` &raquo; `jp.co.s34.selenium`
+上にドラッグ&amp;ドロップします。
 
 image:images/eclipse_selenium_package.png["",height=420]
 
@@ -442,7 +454,7 @@ $ mvn archetype:generate \
 
 実行したディレクトリーに `selenium-rc-tut` というディレクトリーが生成されます。
 
-`selenium-rc-tut/pom.xml` を任意のエディタで以下のように編集します。
+`selenium-rc-tut/pom.xml` を任意のエディターで以下のように編集します。
 
 [[selenium-rc-pom-xml-modification]]
 .selenium-rc-tut/pom.xml の修正内容
@@ -584,7 +596,8 @@ public class SearchOnGoogleRCTestCase extends SeleneseTestCase {
 }
 --------------------
 
-`File` &raquo; `Save` メニューを選択して、`SearchOnGoogleRCTestCase.java` の変更を保存します。
+`File` &raquo; `Save` メニューを選択して、`SearchOnGoogleRCTestCase.java`
+の変更を保存します。
 
 テストコードの実行
 ~~~~~~~~~~~~~~~~~~
@@ -599,7 +612,8 @@ Remote Control サーバーの起動
 
 image:images/eclipse_run_configurations.png["",height=420]
 
-左側のペインから `Java Application` を選択し、その状態で新規作成アイコン image:images/eclipse_new_configuration.png[""] をクリックします。
+左側のペインから `Java Application` を選択し、その状態で新規作成アイコン
+image:images/eclipse_new_configuration.png[""] をクリックします。
 
 以下のように、各項目に対して値を入力します。
 
@@ -611,12 +625,13 @@ image:images/eclipse_run_configurations.png["",height=420]
 |Main class |org.openqa.selenium.server.SeleniumServer
 |=====================================================
 
-入力後、 `Apply`をクリックして設定を保存してから、`Run` をクリックします。
+入力後、 `Apply` をクリックして設定を保存してから、 `Run` をクリックします。
 
 しばらくして、 `Console` ビューに以下のようなログが表示されれば、サーバーの起動が完了となります。
 
-image:images/eclipse_rc_server_started.png[""]
+image:images/eclipse_rc_server_started.png["",width=600]
 
+[[selenium-rc-run-testcase]]
 Remote Control クライアント (テストコード) の起動
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -626,8 +641,8 @@ Remote Control クライアント (テストコード) の起動
 
 Firefox が起動し、テストが自動的に実行されることを確認します。
 
-テスト終了後、`Console` ビューの 停止アイコン image:images/eclipse_terminate.png[""] をクリックし、
-Remote Control サーバーを停止しておきます。
+テスト終了後、`Console` ビューの 停止アイコン image:images/eclipse_terminate.png[""]
+をクリックし、Remote Control サーバーを停止しておきます。
 
 Selenium Grid
 -------------
@@ -647,7 +662,8 @@ $ mvn archetype:generate \
 
 実行したディレクトリーに `selenium-grid-tut` というディレクトリーが生成されます。
 
-`selenium-grid-tut/pom.xml` を任意のエディタで編集し、 <<selenium-rc-pom-xml-modification>> と同様に、以下の修正を加えます。
+`selenium-grid-tut/pom.xml` を任意のエディターで編集し、
+<<selenium-rc-pom-xml-modification>> と同様に、以下の修正を加えます。
 
 * `junit` のバージョン番号を 4.8.2 に変更する
 * `selenium-java` への依存性について定義する `<dependency>` を追加する
@@ -663,7 +679,8 @@ $ cd selenium-grid-tut
 $ mvn eclipse:eclipse
 --------------------
 
-Eclipse の `File` &raquo; `Import` メニューから、ウィザードに従って `selenium-grid-tut` ディレクトリーをインポートします。
+Eclipse の `File` &raquo; `Import` メニューから、ウィザードに従って
+`selenium-grid-tut` ディレクトリーをインポートします。
 
 `Package Explorer` に `selenium-grid-tut` プロジェクトが出来ていることを確認して下さい。
 
@@ -672,7 +689,74 @@ image:images/eclipse_grid_project_imported.png["",height=420]
 テストコードの作成
 ~~~~~~~~~~~~~~~~~~
 
-TODO
+<<webdriver-create-test>> で作成したテスト `SearchOnGoogleWDTestCase.java` をコピーし、
+Selenium Grid で実行できるように、それに対して修正を加えます。
+
+テストケースの複製
+^^^^^^^^^^^^^^^^^^
+
+`Pacage Explorer` の `webdriver-tut` &raquo; `src/test/java` &raquo;
+`jp.co.s34.selenium` &raquo; `SearchOnGoogleWDTestCase.java` を、
+`selenium-grid-tut` &raquo; `src/test/java` &raquo;
+`jp.co.s34.selenium` へ、 `option` キーを押しながらドラッグ&amp;ドロップします。
+
+image:images/eclipse_testcase_copied.png["",height=420]
+
+`selenium-grid-tut` &raquo; `src/test/java` &raquo;
+`jp.co.s34.selenium` &raquo; `SearchOnGoogleWDTestCase.java` を選択した状態で、
+`Refactor` &raquo; `Rename...` メニューを選択します。
+
+image:images/eclipse_rename_comp_unit.png[""]
+
+`New name` を `SearchOnGoogleRemoteWDTestCase` とし、
+他はデフォルトのままで `Finishi` をクリックします。
+
+テストケースの修正
+^^^^^^^^^^^^^^^^^^
+
+`SearchOnGoogleRemoteWDTestCase.java` をダブルクリックしてエディターで開き、以下のように修正します。
+
+[source,java]
+.修正前
+------------------------------
+...
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class SearchOnGoogleRemoteWDTestCase {
+...
+	public void setUp() throws Exception {
+		driver = new FirefoxDriver();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	}
+...
+------------------------------
+
+[source,java]
+.修正後
+------------------------------
+...
+import java.net.URL;                                     /* <1> */
+...
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;   /* <1> */
+import org.openqa.selenium.remote.RemoteWebDriver;       /* <1> */
+...
+public class SearchOnGoogleRemoteWDTestCase {
+...
+	public void setUp() throws Exception {
+		DesiredCapabilities capability = DesiredCapabilities.firefox();  /* <2> */
+		driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"),
+				capability);                                     /* <3> */
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	}
+...
+------------------------------
+
+<1> 必要なクラスをインポートし、不要なインポートを削除します。
+<2> Firefox を起動できるノード上でテストを実行するよう指定します
+<3> Hub サーバーの URI と Node サーバーの capability を指定し、
+    `RemoteWebDriver` のインスタンスを生成します。
 
 テストコードの実行
 ~~~~~~~~~~~~~~~~~~
@@ -680,7 +764,12 @@ TODO
 Hubサーバーの起動
 ^^^^^^^^^^^^^^^^^
 
-TODO
+`Run` &raquo; `Run Configurations...` メニューを選択します。
+
+左側のペインから `Java Application` を選択し、その状態で新規作成アイコン
+image:images/eclipse_new_configuration.png[""] をクリックします。
+
+以下のように、各項目に対して値を入力します。
 
 [options="header",width="50%"]
 |================================================================
@@ -691,10 +780,21 @@ TODO
 |Arguments |Program Arguments |-role hub
 |================================================================
 
+入力後、 `Apply` をクリックして設定を保存してから、 `Run` をクリックします。
+
+しばらくして、 `Console` ビューに以下のようなログが表示されれば、サーバーの起動が完了となります。
+
+image:images/eclipse_hub_server_started.png["",width=600]
+
 WebDriver Node サーバーの起動
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-TODO
+`Run` &raquo; `Run Configurations...` メニューを選択します。
+
+左側のペインから `Java Application` を選択し、その状態で新規作成アイコン
+image:images/eclipse_new_configuration.png[""] をクリックします。
+
+以下のように、各項目に対して値を入力します。
 
 [options="header",width="60%"]
 |================================================================
@@ -705,10 +805,21 @@ TODO
 |Arguments |Program Arguments |-role webdriver -hub http://localhost:4444/grid/register -port 5556
 |================================================================
 
+入力後、 `Apply` をクリックして設定を保存してから、 `Run` をクリックします。
+
+しばらくして、 `Console` ビューに以下のようなログが表示されれば、サーバーの起動が完了となります。
+
+image:images/eclipse_wd_node_server_started.png["",width=600]
+
 Remote Control Node サーバーの起動
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-TODO
+`Run` &raquo; `Run Configurations...` メニューを選択します。
+
+左側のペインから `Java Application` を選択し、その状態で新規作成アイコン
+image:images/eclipse_new_configuration.png[""] をクリックします。
+
+以下のように、各項目に対して値を入力します。
 
 [options="header",width="60%"]
 |================================================================
@@ -719,12 +830,30 @@ TODO
 |Arguments |Program Arguments |-role rc -hub http://localhost:4444/grid/register -port 5555
 |================================================================
 
+入力後、 `Apply` をクリックして設定を保存してから、 `Run` をクリックします。
+
+しばらくして、 `Console` ビューに以下のようなログが表示されれば、サーバーの起動が完了となります。
+
+image:images/eclipse_rc_node_server_started.png["",width=600]
+
 WebDriver クライアント (テストコード) の起動
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-TODO
+`Package Explorer` の `selenium-grid-tut` &raquo; `src/test/java` &raquo;
+`jp.co.s34.selenium` &raquo; `SearchOnGoogleRemoteWDTestCase.java` 上で右クリックし、
+`Run As...` &raquo; `JUnit Test` メニューを選択します。
+
+Firefox が起動し、テストが自動的に実行されることを確認します。
 
 Remote Control クライアント (テストコード) の起動
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-TODO
+<<selenium-rc-run-testcase>> の手順に従って、 
+テストケース `SearchOnGoogleRCTestCase` を実行します。
+
+Firefox が起動し、テストが自動的に実行されることを確認します。
+
+テスト終了後、`Console` ビューの 停止アイコン image:images/eclipse_terminate.png[""]
+をクリックし、Remote Control Node サーバー、WebDriver Node サーバー、Hubサーバーを停止しておきます。
+
+それぞれのコンソールは、image:images/eclipse_switch_console.png[""] で切り替えられます。
